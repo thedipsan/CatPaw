@@ -51,11 +51,11 @@
 
         <!-- Email -->
         <TextView
-            android:id="@+id/tvEmail"
+            android:id="@+id/tvPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="+1 973XXXXXX"
+            android:text="+977 XXXXX XXXXX"
             android:textColor="#172033"
             android:textSize="15sp"
             android:textStyle="bold" />

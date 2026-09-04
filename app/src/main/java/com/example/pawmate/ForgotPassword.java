@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,8 @@ public class ForgotPassword extends AppCompatActivity {
 
     FirebaseAuth mAuth;
 
+    TextView tvUseOTP;
+
 
 
     @Override
@@ -40,6 +43,9 @@ public class ForgotPassword extends AppCompatActivity {
         //Connect with XML
         etEmail= findViewById(R.id.etEmail);
         btnSendReset = findViewById(R.id.btnSendReset);
+
+        tvUseOTP= findViewById(R.id.tvUseOtp);
+
 
 
         // Send reset email
@@ -95,6 +101,12 @@ public class ForgotPassword extends AppCompatActivity {
                     }
                 });
             }
+        });
+
+
+        tvUseOTP.setOnClickListener(v -> {
+            Intent intent = new Intent(ForgotPassword.this, PhoneLogin.class);
+            startActivity(intent);
         });
 
     }
