@@ -36,6 +36,8 @@ android {
 
 dependencies {
     implementation(libs.activity.ktx)
+    //Implementation Google Service auth
+    implementation("com.google.android.gms:play-services-auth:21.4.0")
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.credentials)

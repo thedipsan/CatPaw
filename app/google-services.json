@@ -12,7 +12,20 @@
           "package_name": "com.example.pawmate"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "779880311328-qnp1e05a9nen4f54redi6tj8m2o27fgk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pawmate",
+            "certificate_hash": "4bde89f69f8f33d4693ad66eb3555f3f20e325fa"
+          }
+        },
+        {
+          "client_id": "779880311328-p13tmk312lhaf0ovbpmto742ra6s8r56.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDE5bdZC3Ltvy5MDQ7bbf3CcVnnKnvLf6w"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "779880311328-p13tmk312lhaf0ovbpmto742ra6s8r56.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
