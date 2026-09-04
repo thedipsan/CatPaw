@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="example@email.com"
+            android:text="+1 973XXXXXX"
             android:textColor="#172033"
             android:textSize="15sp"
             android:textStyle="bold" />
