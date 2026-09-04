@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "779880311328",
+    "project_id": "paw-mate-48b72",
+    "storage_bucket": "paw-mate-48b72.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779880311328:android:83a237319105a66cd1aa45",
+        "android_client_info": {
+          "package_name": "com.example.pawmate"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE5bdZC3Ltvy5MDQ7bbf3CcVnnKnvLf6w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

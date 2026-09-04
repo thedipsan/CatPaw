@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@drawable/back"
-    tools:context=".OTPVerification">
+    tools:context=".OtpVerification">
 
     <LinearLayout
         android:id="@+id/main"
@@ -23,9 +23,9 @@
 
         <!-- OTP Icon -->
         <ImageView
-            android:layout_width="130dp"
-            android:layout_height="130dp"
-            android:src="@drawable/otp_verify"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:src="@drawable/otp"
             android:scaleType="centerInside"
             android:contentDescription="OTP Verification" />
 
