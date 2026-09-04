@@ -18,17 +18,15 @@
         android:gravity="center_horizontal"
         android:paddingStart="24dp"
         android:paddingEnd="24dp"
-        android:paddingTop="60dp"
+        android:paddingTop="50dp"
         android:paddingBottom="40dp">
 
-        <!-- Logo -->
+        <!-- PawMate Logo -->
         <ImageView
             android:layout_width="130dp"
             android:layout_height="130dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:src="@drawable/createAc_ic"
-            />
+            android:src="@drawable/create"
+            android:contentDescription="PawMate create account icon" />
 
         <!-- Title -->
         <TextView
@@ -45,7 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="We are here to help you"
+            android:gravity="center"
+            android:text="Create your PawMate account"
             android:textColor="#7A8494"
             android:textSize="15sp" />
 
@@ -54,7 +53,7 @@
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_marginTop="38dp"
+            android:layout_marginTop="32dp"
             android:background="@drawable/edittext_background"
             android:hint="Your Name"
             android:inputType="textPersonName"
@@ -92,7 +91,7 @@
             android:background="@drawable/edittext_background"
             android:hint="Create Password"
             android:inputType="textPassword"
-            android:imeOptions="actionDone"
+            android:imeOptions="actionNext"
             android:paddingStart="18dp"
             android:paddingEnd="18dp"
             android:singleLine="true"
@@ -100,14 +99,14 @@
             android:textColorHint="#A5AFBE"
             android:textSize="15sp" />
 
-
+        <!-- Confirm Password -->
         <EditText
             android:id="@+id/etConfirmPassword"
             android:layout_width="match_parent"
             android:layout_height="54dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/edittext_background"
-            android:hint="Confrim Password"
+            android:hint="Confirm Password"
             android:inputType="textPassword"
             android:imeOptions="actionDone"
             android:paddingStart="18dp"
@@ -117,13 +116,12 @@
             android:textColorHint="#A5AFBE"
             android:textSize="15sp" />
 
-
-        <!-- Continue Button -->
+        <!-- Create Account Button -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnCreateAc"
+            android:id="@+id/btnCreateAccount"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="30dp"
             android:text="Create Account"
             android:textAllCaps="false"
             android:textColor="@color/white"
