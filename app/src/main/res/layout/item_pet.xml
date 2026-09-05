@@ -3,45 +3,56 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/cardPet"
     android:layout_width="match_parent"
     android:layout_height="112dp"
     android:layout_marginBottom="12dp"
+
     android:clickable="true"
     android:focusable="true"
     android:foreground="?attr/selectableItemBackground"
+
     app:cardBackgroundColor="@color/main_background"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
     app:strokeColor="@color/input_broder"
     app:strokeWidth="1dp">
 
+
+    <!-- ================= PET ITEM CONTENT ================= -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
+
         android:paddingStart="12dp"
         android:paddingTop="12dp"
         android:paddingEnd="14dp"
         android:paddingBottom="12dp">
 
-        <!-- ================= PET PHOTO ================= -->
+
+        <!-- ================= PET IMAGE ================= -->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="84dp"
             android:layout_height="84dp"
+
             app:cardBackgroundColor="@color/input_background"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:strokeWidth="0dp">
 
             <ImageView
-                android:id="@+id/ivPetPhoto"
+                android:id="@+id/imgPet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
                 android:contentDescription="Pet photo"
                 android:scaleType="centerCrop"
-                android:src="@drawable/pet_ic" />
+                android:src="@drawable/dog" />
 
         </com.google.android.material.card.MaterialCardView>
 
@@ -51,10 +62,13 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+
             android:layout_marginStart="14dp"
             android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+
             android:orientation="vertical">
+
 
             <!-- Pet Name -->
 
@@ -62,48 +76,63 @@
                 android:id="@+id/tvPetName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Buddy"
+
+                android:text="Buddy 🐾"
                 android:textColor="@color/dark"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <!-- Breed -->
+
+            <!-- Pet Breed -->
 
             <TextView
-                android:id="@+id/tvPetBreed"
+                android:id="@+id/tvBreed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="4dp"
+
+                android:alpha="0.70"
                 android:ellipsize="end"
                 android:maxLines="1"
+
                 android:text="Golden Retriever"
                 android:textColor="@color/dark"
-                android:alpha="0.75"
                 android:textSize="14sp" />
 
-            <!-- Age / Gender -->
+
+            <!-- Pet Age & Gender -->
 
             <TextView
-                android:id="@+id/tvPetAge"
+                android:id="@+id/tvAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp"
+
+                android:layout_marginTop="6dp"
+
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="2 years  •  Male"
+
+                android:text="2 Years Old  •  Male"
                 android:textColor="@color/grey"
                 android:textSize="13sp" />
 
         </LinearLayout>
 
 
-        <!-- ================= VIEW PET BUTTON ================= -->
+        <!-- ================= VIEW DETAILS ================= -->
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardViewPetDetails"
             android:layout_width="36dp"
             android:layout_height="36dp"
+
+            android:clickable="true"
+            android:focusable="true"
+
             app:cardBackgroundColor="@color/input_background"
             app:cardCornerRadius="18dp"
             app:cardElevation="0dp"
@@ -111,10 +140,13 @@
             app:strokeWidth="1dp">
 
             <ImageView
+                android:id="@+id/ivViewPet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="View pet"
+
+                android:contentDescription="View pet details"
                 android:padding="10dp"
+
                 android:src="@drawable/arrow_right"
                 app:tint="@color/primary" />
 
