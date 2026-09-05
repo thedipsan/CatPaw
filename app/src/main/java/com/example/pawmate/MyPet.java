@@ -1,4 +1,4 @@
-package com.example.pawmate;
+        package com.example.pawmate;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,135 +25,117 @@ import java.util.List;
 
 public class MyPet extends AppCompatActivity {
 
+    // UI
     private ImageButton btnBack;
     private ImageButton btnFilterPets;
-    private com.google.android.material.floatingactionbutton.FloatingActionButton btnAddPet;
+    private FloatingActionButton btnAddPet;
 
     private EditText etSearchPets;
-
     private LinearLayout petContainer;
-
     private TextView tvEmpty;
     private TextView tvPetCount;
 
-    // FIREBASE
-
+    // Firebase
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
-    // LOCAL PET LIST
-
+    // All pets
     private final List<QueryDocumentSnapshot> allPets =
             new ArrayList<>();
-
-
-    // ON CREATE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_my_pet);
 
-        // INITIALIZE FIREBASE
+        initFirebase();
+        initViews();
+        setupListeners();
+    }
 
+    // --------------------------------------------------
+    // INITIALIZATION
+    // --------------------------------------------------
+
+    private void initFirebase() {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+    }
 
-        // FIND VIEWS
-
+    private void initViews() {
         btnBack = findViewById(R.id.btnBack);
         btnFilterPets = findViewById(R.id.btnFilterPets);
         btnAddPet = findViewById(R.id.btnAddPet);
 
         etSearchPets = findViewById(R.id.etSearchPets);
-
         petContainer = findViewById(R.id.petContainer);
 
         tvEmpty = findViewById(R.id.tvEmpty);
         tvPetCount = findViewById(R.id.tvPetCount);
+    }
 
-        // BACK BUTTON
+    private void setupListeners() {
 
-        btnBack.setOnClickListener(v -> {
+        // Back
+        btnBack.setOnClickListener(v -> finish());
 
-            finish();
-
-        });
-
-        // ADD PET BUTTON
-
+        // Add pet
         btnAddPet.setOnClickListener(v -> {
-
-            Intent intent =
-                    new Intent(MyPet.this, AddPet.class);
-
+            Intent intent = new Intent(this, AddPet.class);
             startActivity(intent);
-
         });
 
-        // SEARCH
-
-        etSearchPets.addTextChangedListener(
-                new TextWatcher() {
-
-                    @Override
-                    public void beforeTextChanged(
-                            CharSequence s,
-                            int start,
-                            int count,
-                            int after
-                    ) {
-                    }
-
-                    @Override
-                    public void onTextChanged(
-                            CharSequence s,
-                            int start,
-                            int before,
-                            int count
-                    ) {
-
-                        filterPets(
-                                s.toString()
-                        );
-
-                    }
-
-                    @Override
-                    public void afterTextChanged(
-                            Editable s
-                    ) {
-                    }
-                }
+        // Filter information
+        btnFilterPets.setOnClickListener(v ->
+                Toast.makeText(
+                        this,
+                        "You can search by pet name or breed.",
+                        Toast.LENGTH_SHORT
+                ).show()
         );
 
-        // FILTER BUTTON
+        // Search
+        etSearchPets.addTextChangedListener(new TextWatcher() {
 
-        btnFilterPets.setOnClickListener(v -> {
+            @Override
+            public void beforeTextChanged(
+                    CharSequence s,
+                    int start,
+                    int count,
+                    int after
+            ) {
+            }
 
-            Toast.makeText(
-                    MyPet.this,
-                    "You can search by pet name or breed.",
-                    Toast.LENGTH_SHORT
-            ).show();
+            @Override
+            public void onTextChanged(
+                    CharSequence s,
+                    int start,
+                    int before,
+                    int count
+            ) {
+                filterPets(s.toString());
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
         });
     }
 
-
-    // RELOAD WHEN SCREEN RETURNS
+    // --------------------------------------------------
+    // LIFECYCLE
+    // --------------------------------------------------
 
     @Override
     protected void onResume() {
-
         super.onResume();
-
         loadPets();
-
     }
 
-    // LOAD PETS FROM FIRESTORE
+    // --------------------------------------------------
+    // LOAD PETS
+    // --------------------------------------------------
+
     private void loadPets() {
 
         FirebaseUser currentUser =
@@ -247,289 +230,206 @@ public class MyPet extends AppCompatActivity {
                 });
     }
 
+    private void showLoginMessage() {
 
+        petContainer.removeAllViews();
+        tvPetCount.setText("0 pets");
+
+        tvEmpty.setText("Please login again.");
+        tvEmpty.setVisibility(View.VISIBLE);
+    }
+
+    private void showLoadError(Exception e) {
+
+        petContainer.removeAllViews();
+        tvPetCount.setText("0 pets");
+
+        tvEmpty.setText(
+                "Failed to load pets.\nPlease try again."
+        );
+
+        tvEmpty.setVisibility(View.VISIBLE);
+
+        Toast.makeText(
+                this,
+                "Firestore error: " + e.getMessage(),
+                Toast.LENGTH_LONG
+        ).show();
+    }
+
+    // --------------------------------------------------
     // DISPLAY PETS
+    // --------------------------------------------------
 
     private void displayPets(
             List<QueryDocumentSnapshot> pets
     ) {
 
-        // Remove old cards
         petContainer.removeAllViews();
 
-        // NO PETS
-
         if (pets.isEmpty()) {
-
-            tvEmpty.setText(
-                    "No pets found.\n"
-                            + "Tap + to add your first pet 🐾"
-            );
-
-            tvEmpty.setVisibility(
-                    View.VISIBLE
-            );
-
+            showEmptyPets();
             return;
         }
 
-        // PETS EXIST
+        tvEmpty.setVisibility(View.GONE);
 
-        tvEmpty.setVisibility(
-                View.GONE
-        );
-
-        // CREATE CARDS
-
-        for (
-                QueryDocumentSnapshot document
-                : pets
-        ) {
-
+        for (QueryDocumentSnapshot document : pets) {
             addPetCard(document);
-
         }
     }
 
+    private void showEmptyPets() {
 
+        tvEmpty.setText(
+                "No pets found.\n"
+                        + "Tap + to add your first pet 🐾"
+        );
+
+        tvEmpty.setVisibility(View.VISIBLE);
+    }
+
+    // --------------------------------------------------
     // SEARCH PETS
+    // --------------------------------------------------
 
-    private void filterPets(
-            String searchText
-    ) {
+    private void filterPets(String searchText) {
 
-        String query =
-                searchText
-                        .trim()
-                        .toLowerCase();
-
-        // EMPTY SEARCH
+        String query = searchText
+                .trim()
+                .toLowerCase();
 
         if (query.isEmpty()) {
-
-            updatePetCount(
-                    allPets.size()
-            );
-
-            displayPets(
-                    allPets
-            );
-
+            updatePetCount(allPets.size());
+            displayPets(allPets);
             return;
         }
-
-        // ==========================================
-        // FILTERED LIST
-        // ==========================================
 
         List<QueryDocumentSnapshot> filteredPets =
                 new ArrayList<>();
 
-        for (
-                QueryDocumentSnapshot document
-                : allPets
-        ) {
+        for (QueryDocumentSnapshot document : allPets) {
 
-            String name =
-                    document.getString("name");
+            String name = getValue(document, "name");
+            String breed = getValue(document, "breed");
 
-            String breed =
-                    document.getString("breed");
+            if (name.toLowerCase().contains(query)
+                    || breed.toLowerCase().contains(query)) {
 
-            // Safe values
-            if (name == null) {
-                name = "";
-            }
-
-            if (breed == null) {
-                breed = "";
-            }
-
-            // Convert lowercase
-            name =
-                    name.toLowerCase();
-
-            breed =
-                    breed.toLowerCase();
-
-            // Search name OR breed
-            if (
-                    name.contains(query)
-                            ||
-                            breed.contains(query)
-            ) {
-
-                filteredPets.add(
-                        document
-                );
-
+                filteredPets.add(document);
             }
         }
 
-        // Update filtered count
-        updatePetCount(
-                filteredPets.size()
-        );
-
-        // Display filtered pets
-        displayPets(
-                filteredPets
-        );
+        updatePetCount(filteredPets.size());
+        displayPets(filteredPets);
     }
 
-
-    // ==========================================
+    // --------------------------------------------------
     // CREATE PET CARD
-    // ==========================================
+    // --------------------------------------------------
 
     private void addPetCard(
             QueryDocumentSnapshot document
     ) {
 
-        // ==========================================
-        // INFLATE ITEM LAYOUT
-        // ==========================================
-
-        View petView =
-                LayoutInflater
-                        .from(this)
-                        .inflate(
-                                R.layout.item_pet,
-                                petContainer,
-                                false
-                        );
-
-        // ==========================================
-        // FIND CARD VIEWS
-        // ==========================================
+        View petView = LayoutInflater
+                .from(this)
+                .inflate(
+                        R.layout.item_pet,
+                        petContainer,
+                        false
+                );
 
         TextView tvPetName =
-                petView.findViewById(
-                        R.id.tvPetName
-                );
+                petView.findViewById(R.id.tvPetName);
 
         TextView tvBreed =
-                petView.findViewById(
-                        R.id.tvBreed
-                );
+                petView.findViewById(R.id.tvBreed);
 
         TextView tvDetails =
-                petView.findViewById(
-                        R.id.tvDetails
-                );
+                petView.findViewById(R.id.tvDetails);
 
-        // ==========================================
-        // GET FIRESTORE DATA
-        // ==========================================
+        // Get data
+        String name = getValue(document, "name");
+        String breed = getValue(document, "breed");
+        String age = getValue(document, "age");
+        String weight = getValue(document, "weight");
+        String gender = getValue(document, "gender");
 
-        String name =
-                document.getString("name");
+        // Default values
+        name = defaultValue(name, "Unknown Pet");
+        breed = defaultValue(breed, "Unknown Breed");
+        age = defaultValue(age, "N/A");
+        weight = defaultValue(weight, "N/A");
+        gender = defaultValue(gender, "N/A");
 
-        String breed =
-                document.getString("breed");
-
-        String age =
-                document.getString("age");
-
-        String weight =
-                document.getString("weight");
-
-        String gender =
-                document.getString("gender");
-
-        // ==========================================
-        // DEFAULT VALUES
-        // ==========================================
-
-        if (
-                name == null
-                        ||
-                        name.isEmpty()
-        ) {
-
-            name = "Unknown Pet";
-
-        }
-
-        if (
-                breed == null
-                        ||
-                        breed.isEmpty()
-        ) {
-
-            breed = "Unknown Breed";
-
-        }
-
-        if (
-                age == null
-                        ||
-                        age.isEmpty()
-        ) {
-
-            age = "N/A";
-
-        }
-
-        if (
-                weight == null
-                        ||
-                        weight.isEmpty()
-        ) {
-
-            weight = "N/A";
-
-        }
-
-        if (
-                gender == null
-                        ||
-                        gender.isEmpty()
-        ) {
-
-            gender = "N/A";
-
-        }
-
-        // ==========================================
-        // DISPLAY
-        // ==========================================
-
-        tvPetName.setText(
-                name
-        );
-
-        tvBreed.setText(
-                breed
-        );
+        // Display data
+        tvPetName.setText(name);
+        tvBreed.setText(breed);
 
         tvDetails.setText(
-                age
-                        + " years • "
-                        + weight
-                        + " kg • "
+                age + " years • "
+                        + weight + " kg • "
                         + gender
         );
 
-        // ADD CARD
+        // --------------------------------------------------
+        // PET CARD CLICK
+        // --------------------------------------------------
 
-        petContainer.addView(
-                petView
-        );
+        String petId = document.getId();
+
+        petView.setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    MyPet.this,
+                    PetDetails.class
+            );
+
+            intent.putExtra("petId", petId);
+            startActivity(intent);
+        });
+
+        // Add card
+        petContainer.addView(petView);
     }
 
-    // UPDATE PET COUNT
+    // --------------------------------------------------
+    // HELPERS
+    // --------------------------------------------------
 
-    private void updatePetCount(
-            int count
+    private String getValue(
+            QueryDocumentSnapshot document,
+            String field
     ) {
+
+        String value = document.getString(field);
+
+        return value == null ? "" : value;
+    }
+
+    private String defaultValue(
+            String value,
+            String fallback
+    ) {
+
+        if (value == null || value.trim().isEmpty()) {
+            return fallback;
+        }
+
+        return value;
+    }
+
+    // --------------------------------------------------
+    // PET COUNT
+    // --------------------------------------------------
+
+    private void updatePetCount(int count) {
+
         if (count == 1) {
             tvPetCount.setText("1 pet");
-
         } else {
             tvPetCount.setText(count + " pets");
-
         }
     }
 }
-
