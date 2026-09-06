@@ -12,28 +12,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="24dp">
 
-        <!-- ================= HEADER ================= -->
+        <!-- ================================================= -->
+        <!-- HEADER                                            -->
+        <!-- ================================================= -->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/btnBack"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/ic_back"
-                android:contentDescription="Back" />
+                android:contentDescription="Back"
+                android:padding="10dp"
+                android:src="@drawable/ic_back" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="6dp"
                 android:text="Pet Details"
                 android:textColor="#172033"
                 android:textSize="24sp"
@@ -42,55 +49,386 @@
         </LinearLayout>
 
 
-        <!-- ================= PET IMAGE ================= -->
+        <!-- ================================================= -->
+        <!-- PET IMAGE                                         -->
+        <!-- ================================================= -->
 
-        <ImageView
-            android:id="@+id/imgPet"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            android:src="@drawable/pet"
-            android:scaleType="centerCrop"
-            android:contentDescription="Pet photo" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_marginTop="18dp"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="1dp"
+            app:strokeColor="#E8EAF0"
+            app:strokeWidth="1dp">
+
+            <ImageView
+                android:id="@+id/imgPet"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Pet photo"
+                android:scaleType="centerCrop"
+                android:src="@drawable/pet" />
+
+        </com.google.android.material.card.MaterialCardView>
 
 
-        <!-- ================= PET NAME ================= -->
+        <!-- ================================================= -->
+        <!-- PET NAME                                          -->
+        <!-- ================================================= -->
 
         <TextView
             android:id="@+id/tvPetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
             android:text="Buddy"
             android:textColor="#172033"
-            android:textSize="27sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
 
 
-        <!-- Breed -->
+        <!-- ================================================= -->
+        <!-- BREED + AGE                                       -->
+        <!-- ================================================= -->
 
         <TextView
             android:id="@+id/tvBreed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:text="Golden Retriever"
+            android:layout_marginTop="4dp"
+            android:text="Golden Retriever • 2 years"
             android:textColor="#7A8494"
-            android:textSize="15sp" />
+            android:textSize="14sp" />
 
 
-        <!-- ================= INFORMATION CARD ================= -->
+        <!-- ================================================= -->
+        <!-- WEIGHT                                            -->
+        <!-- ================================================= -->
+
+        <TextView
+            android:id="@+id/tvWeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="3dp"
+            android:text="25 kg"
+            android:textColor="#7A8494"
+            android:textSize="13sp" />
+
+
+        <!-- ================================================= -->
+        <!-- HEALTH SUMMARY TITLE                              -->
+        <!-- ================================================= -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Health Summary"
+            android:textColor="#172033"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <!-- ================================================= -->
+        <!-- HEALTH SUMMARY CARD                               -->
+        <!-- ================================================= -->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/white"
             app:cardCornerRadius="18dp"
-            android:backgroundTint="@color/input_background"
-            app:cardElevation="2dp"
+            app:cardElevation="1dp"
+            app:strokeColor="#E8EAF0"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <!-- ========================================= -->
+                <!-- VACCINATIONS                               -->
+                <!-- ========================================= -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_health_icon">
+
+                        <ImageView
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Vaccinations"
+                            android:src="@drawable/ic_vaccination"
+                            app:tint="@color/primary" />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Vaccinations"
+                        android:textColor="#536070"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvVaccinationStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Up to date"
+                        android:textColor="@color/primary"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+
+                <!-- ========================================= -->
+                <!-- DIVIDER                                   -->
+                <!-- ========================================= -->
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="68dp"
+                    android:background="#EEEEEE" />
+
+
+                <!-- ========================================= -->
+                <!-- LAST VET CHECK                             -->
+                <!-- ========================================= -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_health_icon">
+
+                        <ImageView
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Last vet check"
+                            android:src="@drawable/ic_calender"
+                            app:tint="@color/primary" />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Last Vet Check"
+                        android:textColor="#536070"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvLastVetCheck"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="15 Aug 2026"
+                        android:textColor="#536070"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+
+                <!-- ========================================= -->
+                <!-- DIVIDER                                   -->
+                <!-- ========================================= -->
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="68dp"
+                    android:background="#EEEEEE" />
+
+
+                <!-- ========================================= -->
+                <!-- ALLERGIES                                  -->
+                <!-- ========================================= -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:background="@drawable/bg_health_icon">
+
+                        <ImageView
+                            android:layout_width="23dp"
+                            android:layout_height="23dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Allergies"
+                            android:src="@drawable/ic_allerygy"
+                            app:tint="@color/primary" />
+
+                    </FrameLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="Allergies"
+                        android:textColor="#536070"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvAllergies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="None"
+                        android:textColor="#536070"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- CURRENT ROUTINES TITLE                            -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="Current Routines"
+            android:textColor="#172033"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <!-- CURRENT ROUTINE CARD                              -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@android:color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeColor="#E8EAF0"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <!-- Routine Icon -->
+
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_health_icon">
+
+                    <ImageView
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:layout_gravity="center"
+                        android:contentDescription="Routine"
+                        android:src="@drawable/ic_schedule"
+                        app:tint="@color/primary" />
+
+                </FrameLayout>
+
+
+                <!-- Routine Text -->
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvRoutineName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Morning Feeding"
+                        android:textColor="#172033"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvRoutineTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="08:00 AM • Daily"
+                        android:textColor="#7A8494"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+
+                <!-- More Button -->
+
+                <ImageButton
+                    android:id="@+id/btnRoutineMore"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="More options"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_more" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <!-- ================================================= -->
+        <!-- EXTRA PET INFORMATION                             -->
+        <!-- ================================================= -->
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@android:color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
             app:strokeColor="#E8EAF0"
             app:strokeWidth="1dp">
 
@@ -98,127 +436,147 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
-
-                <!-- Age -->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Age"
-                    android:textColor="#7A8494"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tvAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="2 years"
-                    android:textColor="#172033"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-
-                <!-- Weight -->
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Weight"
-                    android:textColor="#7A8494"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tvWeight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="25 kg"
-                    android:textColor="#172033"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
+                android:padding="16dp">
 
                 <!-- Gender -->
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Gender"
-                    android:textColor="#7A8494"
-                    android:textSize="13sp" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="Male"
-                    android:textColor="#172033"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="Gender"
+                        android:src="@drawable/ic_gender"
+                        app:tint="@color/primary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Gender"
+                        android:textColor="#7A8494"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/tvGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:textColor="#172033"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
 
 
                 <!-- Notes -->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="Notes"
-                    android:textColor="#7A8494"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:id="@+id/tvNotes"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:text="Very active and friendly."
-                    android:textColor="#172033"
-                    android:textSize="15sp" />
+                    android:layout_marginTop="16dp"
+                    android:gravity="top"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:contentDescription="Notes"
+                        android:src="@drawable/ic_notes"
+                        app:tint="@color/primary" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Notes"
+                            android:textColor="#7A8494"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tvNotes"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="Very active and friendly."
+                            android:textColor="#172033"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
 
-        <!-- ================= EDIT BUTTON ================= -->
+        <!-- ================================================= -->
+        <!-- EDIT / DELETE BUTTONS                             -->
+        <!-- ================================================= -->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnEditPet"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="25dp"
-            android:text="Edit Pet"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/primary"
-            app:cornerRadius="16dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+
+            <!-- EDIT -->
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditPet"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:text="Edit Pet"
+                android:textAllCaps="false"
+                android:textColor="@color/primary"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="15dp"
+                app:icon="@drawable/ic_edit"
+                app:iconGravity="textStart"
+                app:iconTint="@color/primary"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp" />
 
 
-        <!-- ================= DELETE BUTTON ================= -->
+            <!-- DELETE -->
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDeletePet"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="20dp"
-            android:text="Delete Pet"
-            android:textAllCaps="false"
-            android:textColor="#D32F2F"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:backgroundTint="@android:color/transparent"
-            app:cornerRadius="16dp"
-            app:strokeColor="#D32F2F"
-            app:strokeWidth="1dp" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeletePet"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:text="Delete Pet"
+                android:textAllCaps="false"
+                android:textColor="#D9534F"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="15dp"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="textStart"
+                app:iconTint="#D9534F"
+                app:strokeColor="#E57373"
+                app:strokeWidth="1dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

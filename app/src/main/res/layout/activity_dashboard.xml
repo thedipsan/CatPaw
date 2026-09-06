@@ -8,7 +8,9 @@
     android:orientation="vertical"
     android:background="#F8F9FC">
 
-    <!-- ================= MAIN CONTENT ================= -->
+    <!-- ================================================= -->
+    <!-- MAIN CONTENT                                      -->
+    <!-- ================================================= -->
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +29,9 @@
             android:paddingEnd="20dp"
             android:paddingBottom="24dp">
 
-            <!-- ================= HEADER ================= -->
+            <!-- ================================================= -->
+            <!-- HEADER                                             -->
+            <!-- ================================================= -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,6 +66,7 @@
 
                 </LinearLayout>
 
+
                 <!-- Notification Button -->
 
                 <com.google.android.material.card.MaterialCardView
@@ -88,7 +93,9 @@
             </LinearLayout>
 
 
-            <!-- ================= PET PROFILE ================= -->
+            <!-- ================================================= -->
+            <!-- PET PROFILE                                       -->
+            <!-- ================================================= -->
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardPet"
@@ -107,7 +114,9 @@
                     android:gravity="center_vertical"
                     android:padding="17dp">
 
-                    <!-- Pet Image -->
+                    <!-- ================================================= -->
+                    <!-- PET IMAGE - UNCHANGED                              -->
+                    <!-- ================================================= -->
 
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="112dp"
@@ -152,8 +161,7 @@
                             android:layout_marginTop="7dp"
                             android:text="Golden Retriever • 2 Years"
                             android:textColor="#6E7888"
-                            android:textSize="13sp"
-                        />
+                            android:textSize="13sp" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btnViewPet"
@@ -179,7 +187,129 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <!-- ================= TODAY'S CARE ================= -->
+            <!-- ================================================= -->
+            <!-- TODAY'S PROGRESS - NEW                            -->
+            <!-- ================================================= -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardTodayProgress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#E9EDF1"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingStart="18dp"
+                    android:paddingTop="17dp"
+                    android:paddingEnd="18dp"
+                    android:paddingBottom="17dp">
+
+
+                    <!-- ========================================= -->
+                    <!-- LEFT CONTENT                               -->
+                    <!-- ========================================= -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Today's Progress"
+                            android:textColor="#172033"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:includeFontPadding="false" />
+
+
+                        <!-- Progress Count -->
+
+                        <TextView
+                            android:id="@+id/tvProgressCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="9dp"
+                            android:text="0 / 0"
+                            android:textColor="#172033"
+                            android:textSize="26sp"
+                            android:textStyle="bold"
+                            android:includeFontPadding="false" />
+
+
+                        <!-- Progress Description -->
+
+                        <TextView
+                            android:id="@+id/tvProgressSubtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:text="Tasks completed"
+                            android:textColor="#7A8494"
+                            android:textSize="12sp"
+                            android:includeFontPadding="false" />
+
+                    </LinearLayout>
+
+
+                    <!-- ========================================= -->
+                    <!-- CIRCULAR PROGRESS                          -->
+                    <!-- ========================================= -->
+
+                    <FrameLayout
+                        android:layout_width="82dp"
+                        android:layout_height="82dp"
+                        android:layout_marginStart="12dp"
+                        android:gravity="center">
+
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressToday"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            android:max="100"
+                            android:progress="0"
+                            app:indicatorSize="76dp"
+                            app:indicatorInset="3dp"
+                            app:trackThickness="7dp"
+                            app:trackColor="#E9F2EE"
+                            app:indicatorColor="@color/primary"
+                            app:indicatorDirectionCircular="clockwise" />
+
+
+                        <!-- Percentage -->
+
+                        <TextView
+                            android:id="@+id/tvProgressPercent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="0%"
+                            android:textColor="#172033"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:includeFontPadding="false" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- ================================================= -->
+            <!-- TODAY'S CARE                                      -->
+            <!-- ================================================= -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -195,8 +325,7 @@
                     android:text="Today's Care"
                     android:textColor="#172033"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -209,7 +338,9 @@
             </LinearLayout>
 
 
-            <!-- Care Cards -->
+            <!-- ================================================= -->
+            <!-- CARE CARDS                                        -->
+            <!-- ================================================= -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -217,7 +348,8 @@
                 android:layout_marginTop="13dp"
                 android:orientation="horizontal">
 
-                <!-- Feeding -->
+
+                <!-- ================= FEEDING ================= -->
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardFeeding"
@@ -268,7 +400,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <!-- Exercise -->
+                <!-- ================= EXERCISE ================= -->
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardExercise"
@@ -320,7 +452,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <!-- Medicine -->
+                <!-- ================= MEDICINE ================= -->
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardMedicine"
@@ -373,7 +505,9 @@
             </LinearLayout>
 
 
-            <!-- ================= QUICK ACTIONS ================= -->
+            <!-- ================================================= -->
+            <!-- QUICK ACTIONS                                     -->
+            <!-- ================================================= -->
 
             <TextView
                 android:layout_width="wrap_content"
@@ -382,11 +516,10 @@
                 android:text="Quick Actions"
                 android:textColor="#172033"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
 
-            <!-- My Pets -->
+            <!-- ================= MY PETS ================= -->
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardMyPets"
@@ -438,7 +571,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <!-- Vet Appointments -->
+            <!-- ================= VET APPOINTMENTS ================= -->
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAppointments"
@@ -489,7 +622,7 @@
             </com.google.android.material.card.MaterialCardView>
 
 
-            <!-- Reminders -->
+            <!-- ================= REMINDERS ================= -->
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardReminders"
@@ -543,7 +676,9 @@
     </ScrollView>
 
 
-    <!-- ================= BOTTOM NAVIGATION ================= -->
+    <!-- ================================================= -->
+    <!-- BOTTOM NAVIGATION                                 -->
+    <!-- ================================================= -->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
@@ -558,4 +693,3 @@
         app:menu="@menu/bottom_navigation" />
 
 </LinearLayout>
-

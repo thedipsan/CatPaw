@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- HEADER -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_back"
+                android:contentDescription="Back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Edit Pet"
+                android:textColor="#172033"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+        <!-- PET NAME -->
+
+        <EditText
+            android:id="@+id/etPetName"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Pet Name"
+            android:inputType="textPersonName"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:singleLine="true"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+
+        <!-- BREED -->
+
+        <EditText
+            android:id="@+id/etBreed"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Breed"
+            android:inputType="text"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:singleLine="true"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+
+        <!-- AGE -->
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Age"
+            android:inputType="number"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:singleLine="true"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+
+        <!-- WEIGHT -->
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/edittext_background"
+            android:hint="Weight (kg)"
+            android:inputType="numberDecimal"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:singleLine="true"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+
+        <!-- GENDER -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Gender"
+            android:textColor="#172033"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:text="Female" />
+
+        </RadioGroup>
+
+
+        <!-- NOTES -->
+
+        <EditText
+            android:id="@+id/etNotes"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edittext_background"
+            android:gravity="top"
+            android:hint="Additional notes"
+            android:inputType="textMultiLine"
+            android:padding="18dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+
+        <!-- UPDATE BUTTON -->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUpdatePet"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="20dp"
+            android:text="Update Pet"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>
