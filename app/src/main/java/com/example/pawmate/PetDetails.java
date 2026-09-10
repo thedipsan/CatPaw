@@ -199,25 +199,18 @@ public class PetDetails extends AppCompatActivity {
         });
 
 
-        // =====================================================
         // LOAD PET FROM FIRESTORE
-        // =====================================================
-
         loadPet();
     }
 
 
-    // =========================================================
     // LOAD PET
-    // =========================================================
 
     private void loadPet() {
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        // -----------------------------------------------------
         // CHECK LOGIN
-        // -----------------------------------------------------
 
         if (user == null) {
 
@@ -235,10 +228,8 @@ public class PetDetails extends AppCompatActivity {
         String uid = user.getUid();
 
 
-        // -----------------------------------------------------
         // FIRESTORE PATH
         // users/{uid}/pets/{petId}
-        // -----------------------------------------------------
 
         db.collection("users")
                 .document(uid)
@@ -247,9 +238,7 @@ public class PetDetails extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(document -> {
 
-                    // -------------------------------------------------
                     // PET DOES NOT EXIST
-                    // -------------------------------------------------
 
                     if (!document.exists()) {
 
@@ -264,9 +253,7 @@ public class PetDetails extends AppCompatActivity {
                     }
 
 
-                    // =================================================
                     // BASIC PET INFORMATION
-                    // =================================================
 
                     String name =
                             document.getString("name");
