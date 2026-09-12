@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/back"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingTop="40dp">
+
+    <!-- Header -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccinations"
+        android:textColor="#172033"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPetName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Buddy's Vaccinations"
+        android:textColor="#7A8494"
+        android:textSize="15sp" />
+
+    <!-- Add Button -->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddVaccination"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginTop="25dp"
+        android:text="+ Add Vaccination"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/primary"
+        app:cornerRadius="15dp" />
+
+    <!-- Vaccination List -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerVaccinations"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:clipToPadding="false"
+        android:paddingBottom="20dp" />
+
+    <!-- Empty message -->
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="No vaccination records yet."
+        android:textColor="#7A8494"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+</LinearLayout>

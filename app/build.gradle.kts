@@ -36,8 +36,10 @@ android {
 
 dependencies {
     implementation(libs.activity.ktx)
-    //Implementation Google Service auth
+
+    // Implementation Google Service auth
     implementation("com.google.android.gms:play-services-auth:21.4.0")
+
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)
     implementation(libs.credentials)
@@ -46,6 +48,11 @@ dependencies {
     implementation(libs.firebase.firestore)
     implementation(libs.googleid)
     implementation(libs.material)
+
+    // Cloudinary image upload
+    implementation("com.cloudinary:cloudinary-android:3.1.0")
+    implementation("com.cloudinary:cloudinary-android:3.1.2")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)

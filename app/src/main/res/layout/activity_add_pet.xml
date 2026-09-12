@@ -18,7 +18,6 @@
         android:paddingEnd="20dp"
         android:paddingBottom="24dp">
 
-
         <!-- HEADER -->
 
         <LinearLayout
@@ -65,9 +64,7 @@
         </LinearLayout>
 
 
-        <!-- ================================================= -->
         <!-- PET PHOTO SECTION -->
-        <!-- ================================================= -->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -116,7 +113,6 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -125,7 +121,6 @@
                     android:text="Add a clear photo of your pet"
                     android:textColor="@color/dark"
                     android:textSize="12sp" />
-
 
                 <!-- Choose Photo -->
 
@@ -229,7 +224,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
 
             <!-- AGE -->
 
@@ -393,4 +387,3 @@
     </LinearLayout>
 
 </ScrollView>
-

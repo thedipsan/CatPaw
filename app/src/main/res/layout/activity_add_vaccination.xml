@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Title -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Vaccination"
+            android:textColor="#172033"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="Keep your pet's vaccination records updated."
+            android:textColor="#7A8494"
+            android:textSize="14sp" />
+
+        <!-- Vaccine Name -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Vaccine Name"
+            android:textColor="#172033"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etVaccineName"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_background"
+            android:hint="e.g. Rabies"
+            android:inputType="textCapSentences"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:singleLine="true"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+        <!-- Vaccination Date -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Vaccination Date"
+            android:textColor="#172033"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etVaccinationDate"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_background"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Select vaccination date"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+        <!-- Next Vaccination -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Next Vaccination Date"
+            android:textColor="#172033"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etNextDate"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_background"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Select next vaccination date"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+        <!-- Notes -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Notes"
+            android:textColor="#172033"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etNotes"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/edittext_background"
+            android:gravity="top"
+            android:hint="Add any additional information..."
+            android:inputType="textMultiLine"
+            android:padding="18dp"
+            android:textColor="@color/primary"
+            android:textColorHint="#A5AFBE"
+            android:textSize="15sp" />
+
+        <!-- Save -->
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveVaccination"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="30dp"
+            android:text="Save Vaccination"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="16dp" />
+
+    </LinearLayout>
+
+</ScrollView>

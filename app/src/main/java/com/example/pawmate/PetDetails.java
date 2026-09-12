@@ -12,23 +12,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PetDetails extends AppCompatActivity {
 
-    // =========================================================
-    // HEADER / BUTTONS
-    // =========================================================
-
     private ImageButton btnBack;
     private MaterialButton btnEditPet;
-    private MaterialButton btnDelete;
+    private MaterialButton btnDeletePet;
+    private MaterialButton btnHealthRecords;
     private ImageButton btnRoutineMore;
-
-
-    // =========================================================
-    // PET INFORMATION
-    // =========================================================
 
     private TextView tvPetName;
     private TextView tvBreed;
@@ -36,108 +29,30 @@ public class PetDetails extends AppCompatActivity {
     private TextView tvGender;
     private TextView tvNotes;
 
-
-    // =========================================================
-    // HEALTH INFORMATION
-    // =========================================================
-
     private TextView tvVaccinationStatus;
     private TextView tvLastVetCheck;
     private TextView tvAllergies;
 
-
-    // =========================================================
-    // ROUTINE INFORMATION
-    // =========================================================
-
     private TextView tvRoutineName;
     private TextView tvRoutineTime;
-
-
-    // =========================================================
-    // FIREBASE
-    // =========================================================
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
 
-
-    // =========================================================
-    // PET ID
-    // =========================================================
-
     private String petId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // =====================================================
-        // LOAD LAYOUT
-        // =====================================================
-
         setContentView(R.layout.activity_pet_details);
 
-
-        // =====================================================
-        // INITIALIZE FIREBASE
-        // =====================================================
-
-        mAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-
-
-        // =====================================================
-        // INITIALIZE VIEWS
-        // =====================================================
-
-        btnBack = findViewById(R.id.btnBack);
-        btnEditPet = findViewById(R.id.btnEditPet);
-        btnDelete = findViewById(R.id.btnDeletePet);
-        btnRoutineMore = findViewById(R.id.btnRoutineMore);
-
-
-        // Pet information
-        tvPetName = findViewById(R.id.tvPetName);
-        tvBreed = findViewById(R.id.tvBreed);
-        tvWeight = findViewById(R.id.tvWeight);
-        tvGender = findViewById(R.id.tvGender);
-        tvNotes = findViewById(R.id.tvNotes);
-
-
-        // Health information
-        tvVaccinationStatus =
-                findViewById(R.id.tvVaccinationStatus);
-
-        tvLastVetCheck =
-                findViewById(R.id.tvLastVetCheck);
-
-        tvAllergies =
-                findViewById(R.id.tvAllergies);
-
-
-        // Routine information
-        tvRoutineName =
-                findViewById(R.id.tvRoutineName);
-
-        tvRoutineTime =
-                findViewById(R.id.tvRoutineTime);
-
-
-        // =====================================================
-        // GET PET ID
-        // =====================================================
+        initFirebase();
+        initViews();
 
         petId = getIntent().getStringExtra("petId");
 
-
-        // =====================================================
-        // CHECK PET ID
-        // =====================================================
-
-        if (petId == null || petId.trim().isEmpty()) {
-
+        if (petId == null || petId.isEmpty()) {
             Toast.makeText(
                     this,
                     "Pet information not found",
@@ -148,20 +63,53 @@ public class PetDetails extends AppCompatActivity {
             return;
         }
 
+        setupListeners();
+        loadPet();
+    }
 
-        // =====================================================
-        // BACK BUTTON
-        // =====================================================
+    private void initFirebase() {
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+    }
 
+    private void initViews() {
+
+        btnBack = findViewById(R.id.btnBack);
+        btnEditPet = findViewById(R.id.btnEditPet);
+        btnDeletePet = findViewById(R.id.btnDeletePet);
+        btnHealthRecords = findViewById(R.id.btnHealthRecords);
+        btnRoutineMore = findViewById(R.id.btnRoutineMore);
+
+        tvPetName = findViewById(R.id.tvPetName);
+        tvBreed = findViewById(R.id.tvBreed);
+        tvWeight = findViewById(R.id.tvWeight);
+        tvGender = findViewById(R.id.tvGender);
+        tvNotes = findViewById(R.id.tvNotes);
+
+        tvVaccinationStatus =
+                findViewById(R.id.tvVaccinationStatus);
+
+        tvLastVetCheck =
+                findViewById(R.id.tvLastVetCheck);
+
+        tvAllergies =
+                findViewById(R.id.tvAllergies);
+
+        tvRoutineName =
+                findViewById(R.id.tvRoutineName);
+
+        tvRoutineTime =
+                findViewById(R.id.tvRoutineTime);
+    }
+
+    private void setupListeners() {
+
+        // Back button
         btnBack.setOnClickListener(v -> {
             finish();
         });
 
-
-        // =====================================================
-        // EDIT PET
-        // =====================================================
-
+        // Edit Pet button
         btnEditPet.setOnClickListener(v -> {
 
             Intent intent = new Intent(
@@ -174,20 +122,25 @@ public class PetDetails extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Health Records button
+        btnHealthRecords.setOnClickListener(v -> {
 
-        // =====================================================
-        // DELETE PET
-        // =====================================================
+            Intent intent = new Intent(
+                    PetDetails.this,
+                    HealthRecord.class
+            );
 
-        btnDelete.setOnClickListener(v -> {
+            intent.putExtra("petId", petId);
+
+            startActivity(intent);
+        });
+
+        // Delete Pet button
+        btnDeletePet.setOnClickListener(v -> {
             showDeleteDialog();
         });
 
-
-        // =====================================================
-        // ROUTINE MORE BUTTON
-        // =====================================================
-
+        // Routine more button
         btnRoutineMore.setOnClickListener(v -> {
 
             Toast.makeText(
@@ -195,28 +148,18 @@ public class PetDetails extends AppCompatActivity {
                     "Routine options",
                     Toast.LENGTH_SHORT
             ).show();
-
         });
-
-
-        // LOAD PET FROM FIRESTORE
-        loadPet();
     }
-
-
-    // LOAD PET
 
     private void loadPet() {
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-        // CHECK LOGIN
-
         if (user == null) {
 
             Toast.makeText(
                     this,
-                    "Please login again",
+                    "Please login first",
                     Toast.LENGTH_SHORT
             ).show();
 
@@ -224,12 +167,7 @@ public class PetDetails extends AppCompatActivity {
             return;
         }
 
-
         String uid = user.getUid();
-
-
-        // FIRESTORE PATH
-        // users/{uid}/pets/{petId}
 
         db.collection("users")
                 .document(uid)
@@ -238,9 +176,9 @@ public class PetDetails extends AppCompatActivity {
                 .get()
                 .addOnSuccessListener(document -> {
 
-                    // PET DOES NOT EXIST
-
-                    if (!document.exists()) {
+                    if (document.exists()) {
+                        displayPet(document);
+                    } else {
 
                         Toast.makeText(
                                 PetDetails.this,
@@ -249,178 +187,7 @@ public class PetDetails extends AppCompatActivity {
                         ).show();
 
                         finish();
-                        return;
                     }
-
-
-                    // BASIC PET INFORMATION
-
-                    String name =
-                            document.getString("name");
-
-                    String breed =
-                            document.getString("breed");
-
-                    String age =
-                            document.getString("age");
-
-                    String weight =
-                            document.getString("weight");
-
-                    String gender =
-                            document.getString("gender");
-
-                    String notes =
-                            document.getString("notes");
-
-
-                    // =================================================
-                    // HEALTH INFORMATION
-                    // =================================================
-
-                    String vaccinationStatus =
-                            document.getString("vaccinationStatus");
-
-                    String lastVetCheck =
-                            document.getString("lastVetCheck");
-
-                    String allergies =
-                            document.getString("allergies");
-
-
-                    // =================================================
-                    // ROUTINE INFORMATION
-                    // =================================================
-
-                    String routineName =
-                            document.getString("routineName");
-
-                    String routineTime =
-                            document.getString("routineTime");
-
-
-                    // =================================================
-                    // DEFAULT VALUES
-                    // =================================================
-
-                    if (name == null || name.trim().isEmpty()) {
-                        name = "Unknown Pet";
-                    }
-
-                    if (breed == null || breed.trim().isEmpty()) {
-                        breed = "Unknown Breed";
-                    }
-
-                    if (age == null || age.trim().isEmpty()) {
-                        age = "N/A";
-                    }
-
-                    if (weight == null || weight.trim().isEmpty()) {
-                        weight = "N/A";
-                    }
-
-                    if (gender == null || gender.trim().isEmpty()) {
-                        gender = "N/A";
-                    }
-
-                    if (notes == null || notes.trim().isEmpty()) {
-                        notes = "No additional notes.";
-                    }
-
-                    if (vaccinationStatus == null ||
-                            vaccinationStatus.trim().isEmpty()) {
-
-                        vaccinationStatus = "Not available";
-                    }
-
-                    if (lastVetCheck == null ||
-                            lastVetCheck.trim().isEmpty()) {
-
-                        lastVetCheck = "Not available";
-                    }
-
-                    if (allergies == null ||
-                            allergies.trim().isEmpty()) {
-
-                        allergies = "None";
-                    }
-
-                    if (routineName == null ||
-                            routineName.trim().isEmpty()) {
-
-                        routineName = "No routine added";
-                    }
-
-                    if (routineTime == null ||
-                            routineTime.trim().isEmpty()) {
-
-                        routineTime = "No schedule";
-                    }
-
-
-                    // =================================================
-                    // DISPLAY BASIC PET INFORMATION
-                    // =================================================
-
-                    tvPetName.setText(name);
-
-
-                    // Breed + Age
-                    tvBreed.setText(
-                            breed + " • " + age + " years"
-                    );
-
-
-                    // Weight
-                    if (weight.equals("N/A")) {
-
-                        tvWeight.setText("Weight unavailable");
-
-                    } else {
-
-                        tvWeight.setText(
-                                weight + " kg"
-                        );
-                    }
-
-
-                    // Gender
-                    tvGender.setText(gender);
-
-
-                    // Notes
-                    tvNotes.setText(notes);
-
-
-                    // =================================================
-                    // DISPLAY HEALTH INFORMATION
-                    // =================================================
-
-                    tvVaccinationStatus.setText(
-                            vaccinationStatus
-                    );
-
-                    tvLastVetCheck.setText(
-                            lastVetCheck
-                    );
-
-                    tvAllergies.setText(
-                            allergies
-                    );
-
-
-                    // =================================================
-                    // DISPLAY ROUTINE INFORMATION
-                    // =================================================
-
-                    tvRoutineName.setText(
-                            routineName
-                    );
-
-                    tvRoutineTime.setText(
-                            routineTime
-                    );
-
                 })
                 .addOnFailureListener(e -> {
 
@@ -430,72 +197,193 @@ public class PetDetails extends AppCompatActivity {
                                     + e.getMessage(),
                             Toast.LENGTH_LONG
                     ).show();
-
                 });
     }
 
+    private void displayPet(DocumentSnapshot document) {
 
-    // =========================================================
-    // DELETE CONFIRMATION DIALOG
-    // =========================================================
+        String name = document.getString("name");
+        String breed = document.getString("breed");
+        String age = document.getString("age");
+        String weight = document.getString("weight");
+        String gender = document.getString("gender");
+        String notes = document.getString("notes");
+
+        String vaccinationStatus =
+                document.getString("vaccinationStatus");
+
+        String lastVetCheck =
+                document.getString("lastVetCheck");
+
+        String allergies =
+                document.getString("allergies");
+
+        String routineName =
+                document.getString("routineName");
+
+        String routineTime =
+                document.getString("routineTime");
+
+        // Pet name
+        if (name != null && !name.isEmpty()) {
+            tvPetName.setText(name);
+        } else {
+            tvPetName.setText("Pet");
+        }
+
+        // Breed + Age
+        String breedAge = "";
+
+        if (breed != null && !breed.isEmpty()) {
+            breedAge = breed;
+        }
+
+        if (age != null && !age.isEmpty()) {
+
+            if (!breedAge.isEmpty()) {
+                breedAge += " • ";
+            }
+
+            breedAge += age;
+        }
+
+        if (!breedAge.isEmpty()) {
+            tvBreed.setText(breedAge);
+        } else {
+            tvBreed.setText("Breed and age not specified");
+        }
+
+        // Weight
+        if (weight != null && !weight.isEmpty()) {
+            tvWeight.setText(weight);
+        } else {
+            tvWeight.setText("Weight not specified");
+        }
+
+        // Gender
+        if (gender != null && !gender.isEmpty()) {
+            tvGender.setText(gender);
+        } else {
+            tvGender.setText("Not specified");
+        }
+
+        // Notes
+        if (notes != null && !notes.isEmpty()) {
+            tvNotes.setText(notes);
+        } else {
+            tvNotes.setText("No notes available");
+        }
+
+        // Vaccination status
+        if (vaccinationStatus != null
+                && !vaccinationStatus.isEmpty()) {
+
+            tvVaccinationStatus.setText(
+                    vaccinationStatus
+            );
+
+        } else {
+
+            tvVaccinationStatus.setText(
+                    "Not available"
+            );
+        }
+
+        // Last vet check
+        if (lastVetCheck != null
+                && !lastVetCheck.isEmpty()) {
+
+            tvLastVetCheck.setText(
+                    lastVetCheck
+            );
+
+        } else {
+
+            tvLastVetCheck.setText(
+                    "Not available"
+            );
+        }
+
+        // Allergies
+        if (allergies != null
+                && !allergies.isEmpty()) {
+
+            tvAllergies.setText(
+                    allergies
+            );
+
+        } else {
+
+            tvAllergies.setText(
+                    "None"
+            );
+        }
+
+        // Routine name
+        if (routineName != null
+                && !routineName.isEmpty()) {
+
+            tvRoutineName.setText(
+                    routineName
+            );
+
+        } else {
+
+            tvRoutineName.setText(
+                    "No routine"
+            );
+        }
+
+        // Routine time
+        if (routineTime != null
+                && !routineTime.isEmpty()) {
+
+            tvRoutineTime.setText(
+                    routineTime
+            );
+
+        } else {
+
+            tvRoutineTime.setText(
+                    "Not scheduled"
+            );
+        }
+    }
 
     private void showDeleteDialog() {
 
         new AlertDialog.Builder(this)
-
-                .setTitle("Delete Pet?")
-
+                .setTitle("Delete Pet")
                 .setMessage(
-                        "Are you sure you want to delete this pet?\n\n"
-                                + "This action cannot be undone."
+                        "Are you sure you want to delete this pet?"
                 )
-
                 .setNegativeButton(
                         "Cancel",
                         null
                 )
-
                 .setPositiveButton(
                         "Delete",
                         (dialog, which) -> deletePet()
                 )
-
                 .show();
     }
-
-
-    // =========================================================
-    // DELETE PET
-    // =========================================================
 
     private void deletePet() {
 
         FirebaseUser user = mAuth.getCurrentUser();
 
-
-        // -----------------------------------------------------
-        // CHECK LOGIN
-        // -----------------------------------------------------
-
         if (user == null) {
 
             Toast.makeText(
                     this,
-                    "Please login again",
+                    "Please login first",
                     Toast.LENGTH_SHORT
             ).show();
 
             return;
         }
 
-
         String uid = user.getUid();
-
-
-        // -----------------------------------------------------
-        // DELETE PET
-        // users/{uid}/pets/{petId}
-        // -----------------------------------------------------
 
         db.collection("users")
                 .document(uid)
@@ -510,10 +398,7 @@ public class PetDetails extends AppCompatActivity {
                             Toast.LENGTH_SHORT
                     ).show();
 
-
-                    // Return to previous screen
                     finish();
-
                 })
                 .addOnFailureListener(e -> {
 
@@ -523,25 +408,14 @@ public class PetDetails extends AppCompatActivity {
                                     + e.getMessage(),
                             Toast.LENGTH_LONG
                     ).show();
-
                 });
     }
-
-
-    // =========================================================
-    // REFRESH PET AFTER EDIT
-    // =========================================================
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        /*
-         * When EditPet finishes, this screen becomes visible
-         * again and reloads the latest Firestore data.
-         */
-
-        if (petId != null && !petId.trim().isEmpty()) {
+        if (petId != null && !petId.isEmpty()) {
             loadPet();
         }
     }

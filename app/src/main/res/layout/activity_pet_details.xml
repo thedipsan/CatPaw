@@ -17,9 +17,7 @@
         android:paddingTop="18dp"
         android:paddingBottom="24dp">
 
-        <!-- ================================================= -->
         <!-- HEADER                                            -->
-        <!-- ================================================= -->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,9 +47,7 @@
         </LinearLayout>
 
 
-        <!-- ================================================= -->
         <!-- PET IMAGE                                         -->
-        <!-- ================================================= -->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -73,9 +69,7 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-        <!-- ================================================= -->
         <!-- PET NAME                                          -->
-        <!-- ================================================= -->
 
         <TextView
             android:id="@+id/tvPetName"
@@ -89,9 +83,7 @@
             android:textStyle="bold" />
 
 
-        <!-- ================================================= -->
         <!-- BREED + AGE                                       -->
-        <!-- ================================================= -->
 
         <TextView
             android:id="@+id/tvBreed"
@@ -104,9 +96,7 @@
             android:textSize="14sp" />
 
 
-        <!-- ================================================= -->
         <!-- WEIGHT                                            -->
-        <!-- ================================================= -->
 
         <TextView
             android:id="@+id/tvWeight"
@@ -119,9 +109,7 @@
             android:textSize="13sp" />
 
 
-        <!-- ================================================= -->
         <!-- HEALTH SUMMARY TITLE                              -->
-        <!-- ================================================= -->
 
         <TextView
             android:layout_width="wrap_content"
@@ -321,6 +309,20 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHealthRecords"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="25dp"
+            android:text="Health Records"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="16dp" />
 
 
         <!-- CURRENT ROUTINES TITLE                            -->
